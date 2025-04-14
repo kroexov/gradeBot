@@ -39,6 +39,27 @@ var salariesMap = map[int]string{
 	mayatinPercent:  `Ты \- Маятин Александр Владимирович\! Три источника твоего богатства \- Производительность\, Надежность и Безопасность\.`,
 }
 
+type UndefinedSong struct {
+	Title  string
+	FileID string
+}
+
+var undefinedSongs = []UndefinedSong{
+	{Title: "👨‍🦳 Я Папикян\nТы настоящий олд!", FileID: "CQACAgIAAxkBAAIYxGf81QmNrTRSS1wJsiAd63_1_bZQAAKDKgACimN5Sy0pKTxYB8a1NgQ"},
+	{Title: "🇧🇷🇧🇷🇧🇷 BRAZZIL\nТы трушный студент ФИТИП, возможно пора задуматься о путешествии по Южной Америке?🤔", FileID: "CQACAgIAAxkBAAIY0Gf81Qm63OmYRj5-Cc-u9MCY3zGWAAJVZQACTYCBSJ1O2J8s1NGaNgQ"},
+	{Title: "🤠 morgenISIT\nТы познал все тяжести ИС и теперь целыми днями переписываешься с такими же старичками в оффтопе, вспоминая былое", FileID: "CQACAgIAAxkBAAIYxWf81Qla4KD683FiqEddQphuv65ZAAIVJgACimOBS4cLhzibCEaQNgQ"},
+	{Title: "😎 BlackPapik [Папин Танк]\nТы уважаешь Сергея Седраковича больше, чем все остальные!", FileID: "CQACAgIAAxkBAAIYxmf81QlE0OsJEwKw1Cd1KDivrw3yAAIhJgACimOBS1OWIXhhiVl7NgQ"},
+	{Title: "🗿 ballad\nТы говоришь на языке фактов, продолжай в том же духе", FileID: "CQACAgIAAxkBAAIYy2f81Qkh8HUwe7zmhkiOD3tvF1zsAAK3NQACAefhSxjiRphDXHexNgQ"},
+	{Title: "🖐✌️ +7(952)09-03-02\nНет слов, только 52", FileID: "CQACAgIAAxkBAAIYzGf81QkrJbxgKrt60QJm_qCvPu1AAAK2QwACyc_pSXpS9rkK95qyNgQ"},
+	{Title: "👨‍💻 OOP [Nominalo]\nТы проводишь все выходные без сна, переписывая лабы после очередных правок. Зато потом будешь экспертом по ООП!", FileID: "CQACAgIAAxkBAAIYx2f81Qm0FoTgvlJtQ9_IsTAUJKI5AAImJgACimOBS2f2b6Hh4-ruNgQ"},
+	{Title: "😔 Kreed\nТы сегодня в меланхолично-депрессивном вайбе. Не подходи к балконам и открытым окнам", FileID: "CQACAgIAAxkBAAIYyGf81QnQP6Hm9nkEZCBagnfsx5I5AAIaJwACimOBS1zgmj9-9wKENgQ"},
+	{Title: "😍🥰 NE ROMA\nТы самый трушный фан Ромы!!!", FileID: "CQACAgIAAxkBAAIYyWf81QkTybR7Rrx_3US5isKeqxvhAAIJKwACjKt4STz0zNq6TxFsNgQ"},
+	{Title: "☺️😌😘 heronwater\nНаступила весна и у тебя настроение влюбляться!", FileID: "CQACAgIAAxkBAAIYymf81QkJl3irbNMSletbAAEz_tTxeQACUzYAAuIWCEubwUBeYMT5CjYE"},
+	{Title: "❤️‍🩹❤️‍🩹❤️‍🩹 fitp juice wrld\nВремя выйти на балкон, закурить, задуматься обо всём, что было за эти годы...", FileID: "CQACAgIAAxkBAAIYzWf81Qmuck8tMqG0MTriG3EoLgnFAALzTgACwSYgSyXgjLNc92pfNgQ"},
+	{Title: "🕺💃 Ronimizy\nПолторы минуты вайба в перерыве между сотней лаб - вот всё, что тебе светит в этом семестре", FileID: "CQACAgIAAxkBAAIYzmf81Qk54SWPkUifftXJSgABEA1XNwACr1cAAnXmcEqhKF4vqGxV1DYE"},
+	{Title: "😮‍💨 CAP\nТы устал, возьми отпуск, отдохни от работы!", FileID: "CQACAgIAAxkBAAIYz2f81QlwzvkDI9uQ_jUWxLFHpn3uAAK2VgACw60gS0EPlUaVAuS6NgQ"},
+}
+
 type BotService struct {
 	embedlog.Logger
 	db db.DB
@@ -49,6 +70,9 @@ func NewBotService(logger embedlog.Logger, db db.DB) *BotService {
 }
 
 func (bs BotService) DefaultHandler(ctx context.Context, b *bot.Bot, update *models.Update) {
+	if update.Message != nil && update.Message.Audio != nil {
+		fmt.Println(update.Message.Audio.FileName, " | ", update.Message.Audio.FileID)
+	}
 	if update.InlineQuery != nil && update.InlineQuery.From != nil {
 		if err := bs.answerInlineQuery(ctx, b, update); err != nil {
 			bs.Errorf("%v", err)
@@ -141,6 +165,23 @@ func (bs BotService) answerInlineQuery(ctx context.Context, b *bot.Bot, update *
 				MessageText: fmt.Sprintf("Зарплата @%s: ||%d₽\n%s||", username, salary, ending),
 				ParseMode:   models.ParseModeMarkdown,
 			}},
+		&models.InlineQueryResultArticle{
+			ID:           "2",
+			Title:        "Кто ты из песен Undefined?",
+			ThumbnailURL: "https://memi.klev.club/uploads/posts/2024-12/memi-klev-club-ngvi-p-memi-s-devushkoi-v-naushnikakh-1.jpg",
+			ReplyMarkup: models.InlineKeyboardMarkup{
+				InlineKeyboard: [][]models.InlineKeyboardButton{
+					{
+						models.InlineKeyboardButton{
+							Text:         "Узнать песню",
+							CallbackData: "song",
+						},
+					},
+				}},
+			InputMessageContent: &models.InputTextMessageContent{
+				MessageText: "Нажми и узнаешь!",
+			},
+		},
 	}
 
 	_, err := b.AnswerInlineQuery(ctx, &bot.AnswerInlineQueryParams{
@@ -155,4 +196,24 @@ func (bs BotService) answerInlineQuery(ctx context.Context, b *bot.Bot, update *
 	})
 
 	return err
+}
+
+func FindUndefinedSong(ctx context.Context, b *bot.Bot, update *models.Update) {
+	selectedSong := undefinedSongs[rand.Intn(len(undefinedSongs))]
+	b.EditMessageMedia(ctx, &bot.EditMessageMediaParams{
+		InlineMessageID: update.CallbackQuery.InlineMessageID,
+		Media: &models.InputMediaAudio{
+			Media:   selectedSong.FileID,
+			Caption: selectedSong.Title,
+		},
+		ReplyMarkup: models.InlineKeyboardMarkup{
+			InlineKeyboard: [][]models.InlineKeyboardButton{
+				{
+					models.InlineKeyboardButton{
+						Text:                         "Узнать свою",
+						SwitchInlineQueryCurrentChat: " ",
+					},
+				},
+			}},
+	})
 }

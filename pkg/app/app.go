@@ -55,6 +55,7 @@ func New(appName string, verbose bool, cfg Config, db db.DB, dbc *pg.DB) *App {
 // Run is a function that runs application.
 func (a *App) Run() error {
 	//registerBotHandlers()
+	a.b.RegisterHandler(bot.HandlerTypeCallbackQueryData, "song", bot.MatchTypeExact, botService.FindUndefinedSong)
 	go a.b.Start(context.TODO())
 	return nil
 }

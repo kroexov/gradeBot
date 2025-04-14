@@ -70,9 +70,6 @@ func NewBotService(logger embedlog.Logger, db db.DB) *BotService {
 }
 
 func (bs BotService) DefaultHandler(ctx context.Context, b *bot.Bot, update *models.Update) {
-	if update.Message != nil && update.Message.Audio != nil {
-		fmt.Println(update.Message.Audio.FileName, " | ", update.Message.Audio.FileID)
-	}
 	if update.InlineQuery != nil && update.InlineQuery.From != nil {
 		if err := bs.answerInlineQuery(ctx, b, update); err != nil {
 			bs.Errorf("%v", err)

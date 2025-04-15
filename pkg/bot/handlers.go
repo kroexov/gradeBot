@@ -53,7 +53,7 @@ var undefinedSongs = []UndefinedSong{
 	{Title: "🖐✌️ +7(952)09-03-02\nНет слов, только 52", FileID: "CQACAgIAAxkBAAMaZ_ziMRPjf-MPtN3ZExEvOAnueAMAArZDAALJz-lJ-9xef8n3bTE2BA"},
 	{Title: "👨‍💻 OOP [Nominalo]\nТы проводишь все выходные без сна, переписывая лабы после очередных правок. Зато потом будешь экспертом по ООП!", FileID: "CQACAgIAAxkBAAMVZ_ziMetBWvbzfiLSyCu-6RNlSG0AAiYmAAKKY4FL-eztebHcyeo2BA"},
 	{Title: "😔 Kreed\nТы сегодня в меланхолично-депрессивном вайбе. Не подходи к балконам и открытым окнам", FileID: "CQACAgIAAxkBAAMWZ_ziMRAox71pFkvA-1RI29O180sAAhonAAKKY4FLGx8iCoZbEmY2BA"},
-	{Title: "😍🥰 NE ROMA\nТы самый трушный фан Ромы!!!", FileID: "CQACAgIAAxkBAAMXZ_ziMR_Z64tpnb1UX-S4jlAHC6IAAgkrAAKMq3hJRnGZyQABhBjcNgQ"},
+	{Title: "😍🥰😮‍💨 NE ROMA\nТы самый трушный фан Ромы!!!", FileID: "CQACAgIAAxkBAAMXZ_ziMR_Z64tpnb1UX-S4jlAHC6IAAgkrAAKMq3hJRnGZyQABhBjcNgQ"},
 	{Title: "☺️😌😘 heronwater\nНаступила весна и у тебя настроение влюбляться!", FileID: "CQACAgIAAxkBAAMYZ_ziMYDbUgYdZEIK7IIoJbAYuxMAAlM2AALiFghL4VMu9ITVwxs2BA"},
 	{Title: "❤️‍🩹❤️‍🩹❤️‍🩹 fitp juice wrld\nВремя выйти на балкон, закурить, задуматься обо всём, что было за эти годы...", FileID: "CQACAgIAAxkBAAMbZ_ziMWNoqFshqo_s2KLo8JUowPIAAvNOAALBJiBLUzTze2mBAAHENgQ"},
 	{Title: "🕺💃 Ronimizy\nПолторы минуты вайба в перерыве между сотней лаб - вот всё, что тебе светит в этом семестре", FileID: "CQACAgIAAxkBAAMcZ_ziMZmNwctLX2pXSnfnT69X5c8AAq9XAAJ15nBKNGA4zqckH5w2BA"},
@@ -64,6 +64,7 @@ var undefinedSongs = []UndefinedSong{
 	{Title: "🤖Бонусный нейротрек!\nВся правда о взаимоотношениях этой троицы - только в этом аудиофайле", FileID: "CQACAgIAAxkBAAMmZ_5J-8KxhV_FYAQQMFtKqV4FKGYAAg5qAAKEnPlLZxI20ZJi1Ok2BA"},
 	{Title: "🤖Бонусный нейротрек!\nСегодня в тебе много агрессии и раздражения, пора расслабиться, в кальянную сходи хз", FileID: "CQACAgIAAxkBAAMnZ_5J-2Nvq9xoMFDKwd0f5btGbVEAAg9qAAKEnPlLyLq_WQEys4E2BA"},
 	{Title: "🤖Бонусный нейротрек!\nУ тебя сегодня крупные косяки... Придётся отрабатывать", FileID: "CQACAgIAAxkBAAMiZ_5J-0IG8ypyyPEDeNzSiEfNtKIAAglqAAKEnPlLhvzbrfIpA702BA"},
+	{Title: "🍾🔥😮‍💨 Я закрыл UML (секретный дроп!)\nВздохни с облегчением, худшее уже позади :)", FileID: "CQACAgIAAxkBAAMpZ_5mcfJ8rkkJtR-3mfgb5iyNCj8AAnZLAAJf0CIJO1l_antjt_k2BA"},
 }
 
 type BotService struct {

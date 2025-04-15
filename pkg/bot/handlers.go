@@ -57,7 +57,13 @@ var undefinedSongs = []UndefinedSong{
 	{Title: "☺️😌😘 heronwater\nНаступила весна и у тебя настроение влюбляться!", FileID: "CQACAgIAAxkBAAMYZ_ziMYDbUgYdZEIK7IIoJbAYuxMAAlM2AALiFghL4VMu9ITVwxs2BA"},
 	{Title: "❤️‍🩹❤️‍🩹❤️‍🩹 fitp juice wrld\nВремя выйти на балкон, закурить, задуматься обо всём, что было за эти годы...", FileID: "CQACAgIAAxkBAAMbZ_ziMWNoqFshqo_s2KLo8JUowPIAAvNOAALBJiBLUzTze2mBAAHENgQ"},
 	{Title: "🕺💃 Ronimizy\nПолторы минуты вайба в перерыве между сотней лаб - вот всё, что тебе светит в этом семестре", FileID: "CQACAgIAAxkBAAMcZ_ziMZmNwctLX2pXSnfnT69X5c8AAq9XAAJ15nBKNGA4zqckH5w2BA"},
-	{Title: "😮‍💨 CAP\nТы устал, возьми отпуск, отдохни от работы!", FileID: "CQACAgIAAxkBAAMdZ_ziMfUITyoh2e8k3mqhmS_ZvZ4AArZWAALDrSBL9xcy957VkmQ2BA"},
+	{Title: "🤖Бонусный нейротрек!\nКажется, тебе пора задуматься о бэкапах. Посмотри внимательно, не упала ли ещё база на проде?", FileID: "CQACAgIAAxkBAAMoZ_5J-6BkTYKCUtAjK_Y8-gWtsXAAAhBqAAKEnPlLivuOrk1ND6I2BA"},
+	{Title: "🤖Бонусный нейротрек!\nВ ближайшее время тебе светит освобождение от занятий! Правда, за ним последует очень сложный экзамен...", FileID: "CQACAgIAAxkBAAMjZ_5J-6UDE84tD3fV0Met9PaO-80AAgtqAAKEnPlLP7MOBeTmt7I2BA"},
+	{Title: "🤖Бонусный нейротрек!\nМаксим Валерьевич сегодня не в духе, не советую приближаться к кустам!", FileID: "CQACAgIAAxkBAAMkZ_5J-09afhCqAAHpKEVNife46VjIAAIMagAChJz5S7J1rUPi_KF4NgQ"},
+	{Title: "🤖Бонусный нейротрек!\nСамое время садиться писать диплом, сроки уже горят!", FileID: "CQACAgIAAxkBAAMlZ_5J-yaHqnazWWOdEAABAqH27iJbAAINagAChJz5SxbigaUC0GNXNgQ"},
+	{Title: "🤖Бонусный нейротрек!\nВся правда о взаимоотношениях этой троицы - только в этом аудиофайле", FileID: "CQACAgIAAxkBAAMmZ_5J-8KxhV_FYAQQMFtKqV4FKGYAAg5qAAKEnPlLZxI20ZJi1Ok2BA"},
+	{Title: "🤖Бонусный нейротрек!\nСегодня в тебе много агрессии и раздражения, пора расслабиться, в кальянную сходи хз", FileID: "CQACAgIAAxkBAAMnZ_5J-2Nvq9xoMFDKwd0f5btGbVEAAg9qAAKEnPlLyLq_WQEys4E2BA"},
+	{Title: "🤖Бонусный нейротрек!\nУ тебя сегодня крупные косяки... Придётся отрабатывать", FileID: "CQACAgIAAxkBAAMiZ_5J-0IG8ypyyPEDeNzSiEfNtKIAAglqAAKEnPlLhvzbrfIpA702BA"},
 }
 
 type BotService struct {
@@ -70,6 +76,9 @@ func NewBotService(logger embedlog.Logger, db db.DB) *BotService {
 }
 
 func (bs BotService) DefaultHandler(ctx context.Context, b *bot.Bot, update *models.Update) {
+	if update.Message != nil && update.Message.Audio != nil {
+		println(update.Message.Audio.FileName, "|", update.Message.Audio.FileID)
+	}
 	if update.InlineQuery != nil && update.InlineQuery.From != nil {
 		if err := bs.answerInlineQuery(ctx, b, update); err != nil {
 			bs.Errorf("%v", err)

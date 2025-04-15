@@ -64,7 +64,7 @@ var undefinedSongs = []UndefinedSong{
 	{Title: "🤖Бонусный нейротрек!\nВся правда о взаимоотношениях этой троицы - только в этом аудиофайле", FileID: "CQACAgIAAxkBAAMmZ_5J-8KxhV_FYAQQMFtKqV4FKGYAAg5qAAKEnPlLZxI20ZJi1Ok2BA"},
 	{Title: "🤖Бонусный нейротрек!\nСегодня в тебе много агрессии и раздражения, пора расслабиться, в кальянную сходи хз", FileID: "CQACAgIAAxkBAAMnZ_5J-2Nvq9xoMFDKwd0f5btGbVEAAg9qAAKEnPlLyLq_WQEys4E2BA"},
 	{Title: "🤖Бонусный нейротрек!\nУ тебя сегодня крупные косяки... Придётся отрабатывать", FileID: "CQACAgIAAxkBAAMiZ_5J-0IG8ypyyPEDeNzSiEfNtKIAAglqAAKEnPlLhvzbrfIpA702BA"},
-	{Title: "🍾🔥😮‍💨 Я закрыл UML (секретный дроп!)\nВздохни с облегчением, худшее уже позади :)", FileID: "CQACAgIAAxkBAAMpZ_5mcfJ8rkkJtR-3mfgb5iyNCj8AAnZLAAJf0CIJO1l_antjt_k2BA"},
+	{Title: "🍾🔥😮‍💨 Я закрыл UML (секретный дроп!)\nВздохни с облегчением, худшее уже позади :)", FileID: "CQACAgIAAxkBAAMsZ_5p16mtBtMNY8oOYzpOh7LRHsIAAnZLAAJfOClJ0ll_antjt_k2BA"},
 }
 
 type BotService struct {

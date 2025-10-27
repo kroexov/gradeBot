@@ -39,6 +39,19 @@ var salariesMap = map[int]string{
 	mayatinPercent:  `Ты \- Маятин Александр Владимирович\! Три источника твоего богатства \- Производительность\, Надежность и Безопасность\.`,
 }
 
+var notices = map[int]string{
+	scholarPercent:  `у вас нет оснований для отсрочки\, но нет повестки\! Наверное\, документы потерялись\. Можете отдыхать\. Пока что\.`,
+	brokePercent:    `вам повестка на уточнение сведений\! Явитесь в военкомат\, к которому вы приписаны\, в течение 1 месяца\.`,
+	internPercent:   `вы уже уезжаете в армию\! Ждём вас через год\!`,
+	juniorPercent:   `у вас учебная острочка\, можете пока что выдохнуть\.`,
+	middlePercent:   `у вас есть отсрочка IT\-специалиста\. Не переживайте\, если только не собираетесь уходить в компанию без аккредитации\.`,
+	seniorPercent:   `на вас УЖЕ открыто уголовное дело по статье 328 за уклонение от призыва\!`,
+	teamLeadPercent: `вы купили военный билет\. Но есть нюанс \- он ещё не пришёл\, а повестка уже на госуслугах\.`,
+	ceoPercent:      `у вас отсрочка по детям\! Вовремя подсуетились\, будете папой двух и более ангелочков\.`,
+	papikPercent:    `вы \- Папикян Сергей Седракович\, легенда ИТМО и самый классный человек в мире\. Вас не призовут\.`,
+	mayatinPercent:  `вы уже отслужили и вернулись на ИС\, теперь держите под собой всех духов и джунов\.`,
+}
+
 type UndefinedSong struct {
 	Title  string
 	FileID string
@@ -93,46 +106,57 @@ func (bs BotService) answerInlineQuery(ctx context.Context, b *bot.Bot, update *
 
 	var salary int
 	var ending string
+	var notice string
 	percents := rand.Intn(1000)
 	switch {
 	case percents <= scholarPercent:
 		salary = rand.Intn(1000)
 		ending = salariesMap[scholarPercent]
+		notice = notices[scholarPercent]
 		break
 	case percents <= brokePercent:
 		salary = 10000 + rand.Intn(20000)
 		ending = salariesMap[brokePercent]
+		notice = notices[brokePercent]
 		break
 	case percents <= internPercent:
 		salary = 20000 + (rand.Intn(25000)/1000)*1000
 		ending = salariesMap[internPercent]
+		notice = notices[internPercent]
 		break
 	case percents <= juniorPercent:
 		salary = 40000 + (rand.Intn(40000)/1000)*1000
 		ending = salariesMap[juniorPercent]
+		notice = notices[juniorPercent]
 		break
 	case percents <= middlePercent:
 		salary = 80000 + (rand.Intn(200000)/5000)*5000
 		ending = salariesMap[middlePercent]
+		notice = notices[middlePercent]
 		break
 	case percents <= seniorPercent:
 		salary = 280000 + (rand.Intn(320000)/10000)*10000
 		ending = salariesMap[seniorPercent]
+		notice = notices[seniorPercent]
 		break
 	case percents <= teamLeadPercent:
 		salary = 600000 + (rand.Intn(500000)/50000)*50000
 		ending = salariesMap[teamLeadPercent]
+		notice = notices[teamLeadPercent]
 		break
 	case percents <= ceoPercent:
 		salary = 1100000 + (rand.Intn(10000000)/100000)*100000
 		ending = salariesMap[ceoPercent]
+		notice = notices[ceoPercent]
 		break
 	case percents <= papikPercent:
 		ending = salariesMap[papikPercent]
+		notice = notices[papikPercent]
 		salary = math.MaxInt32
 		break
 	case percents <= mayatinPercent:
 		ending = salariesMap[mayatinPercent]
+		notice = notices[mayatinPercent]
 		salary = math.MaxInt32
 		break
 	}
@@ -189,13 +213,26 @@ func (bs BotService) answerInlineQuery(ctx context.Context, b *bot.Bot, update *
 				MessageText: "Нажми и узнаешь!",
 			},
 		},
+		&models.InlineQueryResultArticle{
+			ID:           "3",
+			Title:        "Твоя повестка",
+			ThumbnailURL: "https://img-webcalypt.ru/uploads/admin/images/meme-templates/8fJBZb4WFqPQ6sjZOHkI6w2ZN34k4Us1.jpg",
+			ReplyMarkup: models.InlineKeyboardMarkup{
+				InlineKeyboard: [][]models.InlineKeyboardButton{
+					{
+						models.InlineKeyboardButton{
+							Text:                         "Узнать свою",
+							SwitchInlineQueryCurrentChat: " ",
+						},
+					},
+				}},
+			InputMessageContent: &models.InputTextMessageContent{
+				MessageText: fmt.Sprintf("@%s ||%s||", username, notice),
+				ParseMode:   models.ParseModeMarkdown,
+			}},
 	}
 
 	_, err := b.AnswerInlineQuery(ctx, &bot.AnswerInlineQueryParams{
-		//Button: &models.InlineQueryResultsButton{
-		//	Text:           "Оставить фидбек",
-		//	StartParameter: "1",
-		//},
 		InlineQueryID: update.InlineQuery.ID,
 		Results:       results,
 		IsPersonal:    true,

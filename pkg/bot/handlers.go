@@ -221,7 +221,7 @@ func (bs BotService) answerInlineQuery(ctx context.Context, b *bot.Bot, update *
 				InlineKeyboard: [][]models.InlineKeyboardButton{
 					{
 						models.InlineKeyboardButton{
-							Text:                         "Узнать свою",
+							Text:                         "Узнать свою повестку",
 							SwitchInlineQueryCurrentChat: " ",
 						},
 					},

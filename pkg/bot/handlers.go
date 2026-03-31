@@ -230,6 +230,18 @@ func (bs BotService) answerInlineQuery(ctx context.Context, b *bot.Bot, update *
 				MessageText: fmt.Sprintf("@%s ||%s||", username, notice),
 				ParseMode:   models.ParseModeMarkdown,
 			}},
+		&models.InlineQueryResultArticle{
+			ID:           "4",
+			Title:        "Мы в MAX!",
+			ThumbnailURL: "https://3dnews.ru/assets/external/illustrations/2025/12/13/1133879/max_01.jpg",
+			InputMessageContent: &models.InputTextMessageContent{
+				MessageText: fmt.Sprintf(`🇷🇺🪆☦️ ЭТОТ БОТ И ЭТОТ ЧАТ ПЕРЕЕЗЖАЕТ В 🇷🇺🪆☦️
+🇷🇺НАРОДНЫЙ🇷🇺
+🇷🇺🇷🇺🇷🇺МЕССЕНДЖЕР🇷🇺🇷🇺🇷🇺
+🇷🇺🇷🇺🇷🇺MAX \(МАКС\)🇷🇺🇷🇺🇷🇺[​](https://max.ru)
+[ССЫЛКА](https://vk.com/video807566_169118280)`),
+				ParseMode: models.ParseModeMarkdown,
+			}},
 	}
 
 	_, err := b.AnswerInlineQuery(ctx, &bot.AnswerInlineQueryParams{

@@ -120,27 +120,27 @@ func (bs BotService) answerInlineQuery(ctx context.Context, b *bot.Bot, update *
 		notice = notices[brokePercent]
 		break
 	case percents <= internPercent:
-		salary = 20000 + (rand.Intn(25000)/1000)*1000
+		salary = 50000 + rand.Intn(51)*1000
 		ending = salariesMap[internPercent]
 		notice = notices[internPercent]
 		break
 	case percents <= juniorPercent:
-		salary = 40000 + (rand.Intn(40000)/1000)*1000
+		salary = 100000 + rand.Intn(81)*1000
 		ending = salariesMap[juniorPercent]
 		notice = notices[juniorPercent]
 		break
 	case percents <= middlePercent:
-		salary = 80000 + (rand.Intn(200000)/5000)*5000
+		salary = 180000 + rand.Intn(29)*5000
 		ending = salariesMap[middlePercent]
 		notice = notices[middlePercent]
 		break
 	case percents <= seniorPercent:
-		salary = 280000 + (rand.Intn(320000)/10000)*10000
+		salary = 300000 + rand.Intn(21)*10000
 		ending = salariesMap[seniorPercent]
 		notice = notices[seniorPercent]
 		break
 	case percents <= teamLeadPercent:
-		salary = 600000 + (rand.Intn(500000)/50000)*50000
+		salary = 450000 + rand.Intn(8)*50000
 		ending = salariesMap[teamLeadPercent]
 		notice = notices[teamLeadPercent]
 		break
